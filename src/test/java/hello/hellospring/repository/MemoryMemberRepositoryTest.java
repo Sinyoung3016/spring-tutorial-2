@@ -8,8 +8,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
 
-
-class MemoryMemberRepositoryTests {
+class MemoryMemberRepositoryTest {
 
     MemoryMemberRepository repository = new MemoryMemberRepository();
 
@@ -19,7 +18,7 @@ class MemoryMemberRepositoryTests {
     }
 
     @Test
-    public void save(){
+    public void save() {
         Member member = new Member();
         member.setName("sinyoung");
 
@@ -30,7 +29,7 @@ class MemoryMemberRepositoryTests {
     }
 
     @Test
-    public void findByName(){
+    public void findByName() {
         Member member1 = new Member();
         member1.setName("mike");
         repository.save(member1);
@@ -44,7 +43,22 @@ class MemoryMemberRepositoryTests {
     }
 
     @Test
-    public void findAll(){
+    public void findByID() {
+        Member member1 = new Member();
+        member1.setName("mike");
+        repository.save(member1);
+
+        Member member2 = new Member();
+        member2.setName("jason");
+        repository.save(member2);
+
+        Member result = repository.findById((long) 1).get();
+        assertThat(member1.getName()).isEqualTo(result.getName());
+
+    }
+
+    @Test
+    public void findAll() {
         Member member1 = new Member();
         member1.setName("mike");
         repository.save(member1);
